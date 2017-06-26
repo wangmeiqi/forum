@@ -1,0 +1,24 @@
+{
+  "name": "forum",
+  "version": "1.0.0",
+  "description": "sudo mongod -f /usr/local/bin/mongodb.conf ## 关闭  mongo 命令下 use admin db.shutdownServer();",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "formidable": "^1.1.1",
+    "gm": "^1.23.0",
+    "jquery": "^3.2.1",
+    "mongodb": "^2.2.29",
+    "silly-datetime": "^0.1.2"
+  }
+}

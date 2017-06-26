@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>论坛</title>
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/css/jumbotron.css" rel="stylesheet">
+</head>
+
+<body>
+<!--引入公共头部-->
+<% include pub/top.ejs%>
+
+<div class="container">
+  <h1>上传头像</h1>
+  <hr>
+  <form action="/doAvatar" style="width: 40%;" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="avatar">上传小尺寸图片</label>
+      <input name="avatar" type="file" id="avatar">
+      <p class="help-block"></p>
+    </div>
+    <!--<div class="checkbox">
+      <label>
+        <input type="checkbox" required> 我同意
+      </label>
+    </div>-->
+    <button type="submit" class="btn btn-primary col-md-4">上传头像</button>
+  </form>
+
+</div>
+
+<!--引入公共尾部-->
+<% include pub/footer.ejs%>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>
+
+</script>
+</body>
+</html>

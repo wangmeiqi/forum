@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>论坛</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <style>
+        .content {
+            width: 300px;
+            height: 30px;
+            line-height: 40px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+<!--引入公共头部-->
+<% include pub/top.ejs %>
+
+<div class="jumbotron">
+    <% if(login){ %>
+    <div class="container">
+        <div class="row">
+            <a style="width: 200px;height:200px" class="col-md-3" href="/upAvatar"><img style="width: 100%;height: 100%"
+                                                                                        src="/avatar/<%= avatar %>"
+                                                                                        alt=""></a>
+            <div class="col-md-8">
+                <h2 style="margin-top: 5px">欢迎您！<%= username %></h2>
+                <form id="form-message" class="form-horizontal" style="font-size: 18px;font-weight: normal">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">留言主题：</label>
+                        <div class="col-sm-10">
+                            <input name="title" id="title" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="col-sm-2 control-label">请留言：</label>
+                        <div class="col-sm-10">
+                            <textarea style="margin-bottom: 20px" class="form-control" rows="4" name="content"
+                                      id="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <p id="submit"><a class="btn btn-primary btn-md" href="#" role="button">提交留言</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% }else{ %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>论坛欢迎您！</h2>
+                <div style="height: 200px">
+                    <p>如果你热爱技术，欢迎来这里进行讨论和学习！</p>
+                </div>
+                <p><a class="btn btn-primary btn-md" href="/reg" role="button">欢迎注册</a></p>
+            </div>
+            <div class="col-md-6">
+                <h2>欢迎登录</h2>
+                <hr>
+                <form style="width: 80%;">
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="email" class="form-control" id="username" name="username" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" required> 我同意
+                        </label>
+                    </div>
+                    <button type="button" id="regBtn" class="btn btn-primary btn-md">欢迎登录</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!--<li><a href="#">1</a></li>-->
+        </ul>
+    </nav>
+    <div class="row" id="container-message">
+        <!--<div class="col-md-4">
+            <h2><img src="" alt="">xxx说：</h2>
+            <p>【内容】：Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+                euismod. Donec sed odio dui. </p>
+            <p>【时间】：年月日</p>
+            <p><a class="btn btn-info" href="#" role="button">删除 &raquo;</a></p>
+        </div>-->
+    </div>
+
+</div> <!-- /container -->
+
+<!--引入公共尾部-->
+<% include pub/footer.ejs %>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>
+  var pageamount = 6;
+  var $li=null;
+  //获取分页
+  $.ajax({
+    url: '/paging',
+    async: false,
+    success: function (count) {
+      var num = Math.ceil(count / pageamount)
+      var str = "";
+      for (var i = 0; i < num; i++) {
+        str += `<li><a href="javascript:;">${i + 1}</a></li>`
+        $('.pagination').html(str);
+        $li=$('.pagination').children('li');
+      }
+    }
+  })
+  //未登录时的登录请求
+  $('#regBtn').click(function () {
+    $.ajax({
+      url: '/doLogin',
+      data: $('form').serialize(),
+      type: 'post',
+      success: function (val) {
+        if (val.bok) {
+          alert(val.msg);
+          window.location.href = '/';
+        } else {
+          alert(val.msg);
+        }
+      }
+    })
+  })
+  //登录后提交留言
+  $('#submit').click(function () {
+    $.ajax({
+      url: '/submit',
+      type: 'post',
+      data: $('#form-message').serialize(),
+      success: function (val) {
+        if (val.bok) {
+          alert(val.msg);
+          window.location.href = '/'
+        } else {
+          alert(val.msg);
+        }
+      }
+    })
+  })
+  //加载完页面，请求所有数据
+  page(0);
+  $li.first().addClass('active');
+  $li.click(function () {
+    $(this).addClass('active').siblings('li').removeClass('active');
+    page($(this).index());
+  })
+  function page(page) {
+    $.ajax({
+      url: 'getAllData',
+      data: {page, pageamount},
+      success: function (val) {
+        if (val.bok) {
+          var data = val.msg;
+          var str = "";
+          for (var i = 0; i < data.length; i++) {
+            var cur = data[i];
+            str += `<div class="col-md-4">
+            <h4><img style="width: 60px;margin-right: 5px" src="./avatar/${cur.avatar}" alt="">${cur.username}说：${cur.title}</h4>
+            <p class="content">【内容】：${cur.content} </p>
+            <p class="content">【时间】：${cur.time}</p>
+            <p >
+            <a style="margin-right: 10px" class="btn btn-info" href="#" role="button">删除 &raquo;</a>
+            <a class="btn btn-info" href="#" role="button">显示详情 &raquo;</a>
+            </p>
+        </div>`
+          }
+          $('#container-message').html(str);
+        } else {
+          alert(val.msg)
+        }
+      }
+    })
+  }
+
+</script>
+</body>
+</html>
