@@ -181,13 +181,13 @@
           var str = "";
           for (var i = 0; i < data.length; i++) {
             var cur = data[i];
-            str += `<div class="col-md-4">
-            <h4><img style="width: 60px;margin-right: 5px" src="./avatar/${cur.avatar}" alt="">${cur.username}说：${cur.title}</h4>
+            str += `<div class="col-md-4" style="height: 250px;overflow: hidden">
+            <h4 class="content" style="height: 60px;line-height: 60px;"><img style="width: 60px;height: 60px;margin-right: 5px" src="./avatar/${cur.avatar}" alt="">${cur.username}说：${cur.title}</h4>
             <p class="content">【内容】：${cur.content} </p>
             <p class="content">【时间】：${cur.time}</p>
             <p >
-            <a style="margin-right: 10px" class="btn btn-info" href="#" role="button">删除 &raquo;</a>
-            <a class="btn btn-info" href="#" role="button">显示详情 &raquo;</a>
+            <a style="margin-right: 10px" class="btn btn-info" href="/delete/${cur._id}" role="button">删除 &raquo;</a>
+            <a class="btn btn-info" href="/detail/${cur._id}" role="button">显示详情 &raquo;</a>
             </p>
         </div>`
           }

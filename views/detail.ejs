@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>论坛</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <style>
+        .content {
+            width: 300px;
+            height: 30px;
+            line-height: 40px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+<!--引入公共头部-->
+<% include pub/top.ejs %>
+<div class="jumbotron">
+    <div class="container">
+        <h2><img style="width: 200px;height: 200px;margin-right: 20px"  src="/avatar/<%= avatar %>" alt=""><%=title%></h2>
+        <h4><%=time%></h4>
+        <p style="font-size: 16px"><%=content%></p>
+    </div>
+</div>
+
+<!--引入公共尾部-->
+<% include pub/footer.ejs %>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+
+</body>
+</html>

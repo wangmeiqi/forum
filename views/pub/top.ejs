@@ -13,8 +13,8 @@
             <ul class="nav navbar-nav">
                 <li <%if(current=="首页"){%>class="active"<%}%>><a href="/">全部说说</a></li>
                 <% if(login){%>
-                <li <%if(current=="说说"){%>class="active"<%}%>><a href="#">我的说说</a></li>
-                <li <%if(current=="列表"){%>class="active"<%}%>><a href="#">用户列表</a></li>
+                <li <%if(current=="说说"){%>class="active"<%}%>><a href="/myTalk">我的说说</a></li>
+                <li <%if(current=="列表"){%>class="active"<%}%>><a href="/userList">用户列表</a></li>
                 <%}%>
             </ul>
             <% if(login){%>

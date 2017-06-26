@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>论坛</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!--引入公共头部-->
+<% include pub/top.ejs %>
+<div style="margin-top: 20px" class="container">
+    <%for(var i=0;i<talk.length;i++){%>
+    <div class="panel panel-info">
+        <div class="panel-heading ">
+            <%=talk[i].title%>
+        </div>
+        <div class="panel-body"><%=talk[i].content%></div>
+    </div>
+    <%}%>
+</div>
+
+<!--引入公共尾部-->
+<% include pub/footer.ejs %>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+
+</body>
+</html>

@@ -41,3 +41,11 @@ app.post('/submit',router.submit);
 app.get('/getAllData',router.getAllData);
 //获取总页数
 app.get('/paging',router.paging);
+//删除当前留言
+app.get('/delete/:id',router.delete);
+//显示详情页面
+app.get('/detail/:id',router.detail);
+//获取当前登录用户的说说
+app.get('/myTalk',router.myTalk);
+//获取所有用户列表
+app.get('/userList',router.userList);
