@@ -16,8 +16,8 @@ app.use('/avatar',express.static('./avatar'));
 
 //路由设计
 app.get('/',router.showIndex);
-app.listen(8080,function (err) {
-  console.log('app is listening 8080')
+app.listen(3000,function (err) {
+  console.log('app is listening 3000')
 });
 //渲染注册页面
 app.get('/reg',router.showReg);
