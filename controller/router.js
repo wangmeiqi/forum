@@ -210,7 +210,7 @@ exports.delete = function (req, res, next) {
 exports.detail=function (req, res, next) {
   var _id=ObjectId(req.params.id);
   db.find('messages',{_id},function (err, result) {
-    console.log(result);
+    //console.log(result);
     res.render('detail',{
       login: req.session.login ? true : false,
       username: req.session.login ? req.session.username : '',

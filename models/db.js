@@ -8,7 +8,7 @@ function _MongoConnect(callback) {
       callback(err, null);
       return;
     }
-    console.log('数据库链接成功');
+    //console.log('数据库链接成功');
     callback(db);
   });
 }
